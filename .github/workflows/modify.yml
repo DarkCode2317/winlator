@@ -14,13 +14,17 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          ref: android
 
-      - name: Create android branch
+      - name: Download winlator 7.1 source code
+        run: |
+          wget https://github.com/brunodev85/winlator/archive/refs/tags/v7.0.0.zip
+
+      - name: Commit
         run: |
           git config user.name "DarkCode2317"
           git config user.email "darkcode2317@gmail.com"
 
-          git checkout -b android
-
+          git add .
+          git commit -m "Modify repo"
           git push origin android
