@@ -1,13 +1,14 @@
 name: Modify Repo
 on:
   workflow_dispatch:
+permissions:
+  contents: write
 
 jobs:
 
   modify:
-
-    permissions :
-      contents: write
+    runs-on: ubuntu-latest
+    steps:
 
       - name: Commit
         run: |
@@ -15,4 +16,4 @@ jobs:
           git config user.email "darkcode2317@gmail.com"
           git add .
           git commit -m "Modify repo"
-          git push origin HEAD:vanilla --force
+          git push origin android --force
