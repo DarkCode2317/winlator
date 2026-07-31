@@ -14,6 +14,6 @@ jobs:
         run: |
           git config user.name "DarkCode2317"
           git config user.email "darkcode2317@gmail.com"
-          git add .
-          git commit -m "Modify repo"
-          git push origin android --force
+          git commit --allow-empty -m "Create android branch"
+          git branch -M android
+          git push origin android
