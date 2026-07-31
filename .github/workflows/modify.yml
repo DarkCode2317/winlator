@@ -12,8 +12,10 @@ jobs:
 
       - name: Commit
         run: |
+          git init
           git config user.name "DarkCode2317"
           git config user.email "darkcode2317@gmail.com"
+          git remote add origin https://github.com/DarkCode2317/winlator.git
           git commit --allow-empty -m "Create android branch"
           git branch -M android
           git push origin android
