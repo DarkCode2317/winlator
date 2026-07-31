@@ -1,21 +1,26 @@
 name: Modify Repo
+
 on:
   workflow_dispatch:
+
 permissions:
   contents: write
 
 jobs:
-
-  modify:
+  create:
     runs-on: ubuntu-latest
-    steps:
 
-      - name: Commit
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Create android branch
         run: |
-          git init
           git config user.name "DarkCode2317"
           git config user.email "darkcode2317@gmail.com"
-          git remote add origin https://github.com/DarkCode2317/winlator.git
-          git commit --allow-empty -m "Create android branch"
-          git branch -M android
+
+          git checkout -b android
+
           git push origin android
