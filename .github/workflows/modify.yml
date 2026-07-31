@@ -16,11 +16,14 @@ jobs:
         with:
           ref: android
 
-      - name: Download winlator 7.1 source code
+      - name: Download winlator 7.1 source code zip file
         run: |
           rm -rf ./*
           wget -O winlator.zip https://github.com/brunodev85/winlator/archive/refs/tags/v7.1.0.zip
-          unzip winlator.zip
+
+      - name: Extract
+        run: |
+          unzip -l winlator.zip | head 50
           rm winlator.zip
 
       - name: Commit
