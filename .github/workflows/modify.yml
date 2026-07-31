@@ -1,0 +1,18 @@
+name: Modify Repo
+on:
+  workflow_dispatch:
+
+jobs:
+
+  modify:
+
+    permissions :
+      contents: write
+
+      - name: Commit
+        run: |
+          git config user.name "DarkCode2317"
+          git config user.email "darkcode2317@gmail.com"
+          git add .
+          git commit -m "Modify repo"
+          git push origin HEAD:vanilla --force
