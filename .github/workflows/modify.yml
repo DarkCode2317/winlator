@@ -16,20 +16,7 @@ jobs:
         with:
           ref: android
 
-      - name: Download gradle
+      - name: Preview imagefs
         run: |
-          wget \
-          https://raw.githubusercontent.com/DarkCode2317/winlator-7.1/vanilla/gradle/wrapper/gradle-wrapper.jar \
-          https://raw.githubusercontent.com/DarkCode2317/winlator-7.1/vanilla/gradle/wrapper/gradle-wrapper.properties
-          mkdir -p gradle/wrapper/
-          mv gradle-wrapper.jar gradle/wrapper
-          mv gradle-wrapper.properties gradle/wrapper
-
-      - name: Commit
-        run: |
-          git config user.name "DarkCode2317"
-          git config user.email "darkcode2317@gmail.com"
-
-          git add .
-          git commit -m "Modify repo"
-          git push origin android --force
+          tar -tf app/src/main/assets/imagefs.txz | head -n 50
+      
