@@ -19,12 +19,12 @@ jobs:
       - name: Download LFS
         run: |
           git lfs install
-          git lfs fetch --all
-          git lfs checkout
+          git lfs pull
 
-      - name: Preview imagefs
+      - name: Extract imagefs
         run: |
-          tar -tf app/src/main/assets/imagefs.txz | head -n 50
+          mkdir imagefs
+          unzip app/src/main/assets/imagefs.txz -d imagefs
 
       - name: Commit
         run: |
