@@ -7,7 +7,7 @@ permissions:
   contents: write
 
 jobs:
-  create:
+  modify:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,7 +23,7 @@ jobs:
 
       - name: Extract
         run: |
-          unzip -l winlator.zip | head 50
+          unzip -l winlator.zip | head -n 50
           rm winlator.zip
 
       - name: Commit
