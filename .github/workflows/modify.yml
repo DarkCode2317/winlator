@@ -19,7 +19,11 @@ jobs:
       - name: Download gradle
         run: |
           wget \
-          https://raw.githubusercontent.com/DarkCode2317/
+          https://raw.githubusercontent.com/DarkCode2317/winlator-7.1/vanilla/gradle/wrapper/gradle-wrapper.jar \
+          https://raw.githubusercontent.com/DarkCode2317/winlator-7.1/vanilla/gradle/wrapper/gradle-wrapper.properties
+          mkdir -p gradle/wrapper/
+          mv gradle-wrapper.jar gradle/wrapper
+          mv gradle-wrapper.properties gradle/wrapper
 
       - name: Commit
         run: |
