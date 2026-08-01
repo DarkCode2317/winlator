@@ -30,6 +30,14 @@ jobs:
         run: |
           tar -tf obb_image_generator/ubuntu-prepared.txz | grep -i 64
 
+      - name: List 64 of patches.txz
+        run: |
+          tar -tf obb_image_generator/patches.txz | grep -i 64
+
+      - name: List 64 of wine.txz
+        run: |
+          tar -tf obb_image_generator/wine.txz | grep -i 64
+
       - name: Commit
         run: |
           git config user.name "DarkCode2317"
