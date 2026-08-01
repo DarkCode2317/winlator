@@ -22,14 +22,6 @@ jobs:
 
       - name: Extract
         run: |
-          unzip -l winlator.zip | head -n 50
+          unzip winlator.zip
           rm winlator.zip
-
-      - name: Commit
-        run: |
-          git config user.name "DarkCode2317"
-          git config user.email "darkcode2317@gmail.com"
-
-          git add .
-          git commit -m "Modify repo"
-          git push origin android --force
+          find . -name .gitattributes
