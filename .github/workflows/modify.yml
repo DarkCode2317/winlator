@@ -24,12 +24,21 @@ jobs:
         run: |
           unzip winlator.zip
           rm winlator.zip
-
-      - name: Check LFS
+      
+      - name: Delete LFS
         run: |
-          echo "=====Finding .gitattributes files:"
-          find . -name .gitattributes
-          echo "=====Printing content:"
-          cat winlator-7.1.0/obb_image_generator/.gitattributes
+          find . -name .gitattributes -delete
 
-          cat winlator-7.1.0/app/src/main/assets/.gitattributes
+      - name: Move content to current
+        run: |
+          mv winlator-7.1.0/* winlator-7.1.0/.[!.]* winlator-7.1.0/..?* . 2>/dev/null || true
+          rm -rf winlator-7.1.0
+
+      - name: Commit
+        run: |
+          git config user.name "DarkCode2317"
+          git config user.email "darkcode2317@gmail.com"
+
+          git add .
+          git commit -m "Modify repo"
+          git push origin android --force
