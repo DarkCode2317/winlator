@@ -18,7 +18,6 @@ jobs:
 
       - name: Download winlator 7.1 source code zip file
         run: |
-          rm -rf ./*
           wget -O winlator.zip https://github.com/brunodev85/winlator/archive/refs/tags/v7.1.0.zip
 
       - name: Extract
