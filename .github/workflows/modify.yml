@@ -32,4 +32,4 @@ jobs:
           echo "=====Printing content:"
           cat winlator-7.1.0/obb_image_generator/.gitattributes
 
-cat winlator-7.1.0/app/src/main/assets/.gitattributes
+          cat winlator-7.1.0/app/src/main/assets/.gitattributes
