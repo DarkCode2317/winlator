@@ -16,7 +16,22 @@ jobs:
         with:
           ref: android
 
+      - name: Download LFS
+        run: |
+          sudo apt install git-lfs
+          git lfs install
+          git lfs pull
+
       - name: Preview imagefs
         run: |
           tar -tf app/src/main/assets/imagefs.txz | head -n 50
+
+      - name: Commit
+        run: |
+          git config user.name "DarkCode2317"
+          git config user.email "darkcode2317@gmail.com"
+
+          git add .
+          git commit -m "Modify repo"
+          git push origin android --force
       
