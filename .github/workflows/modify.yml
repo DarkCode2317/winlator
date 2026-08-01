@@ -27,4 +27,9 @@ jobs:
 
       - name: Check LFS
         run: |
+          echo "=====Finding .gitattributes files:"
           find . -name .gitattributes
+          echo "=====Printing content:"
+          cat winlator-7.1.0/obb_image_generator/.gitattributes
+
+cat winlator-7.1.0/app/src/main/assets/.gitattributes
