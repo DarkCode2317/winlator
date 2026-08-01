@@ -24,4 +24,7 @@ jobs:
         run: |
           unzip winlator.zip
           rm winlator.zip
+
+      - name: Check LFS
+        run: |
           find . -name .gitattributes
