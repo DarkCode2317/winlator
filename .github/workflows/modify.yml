@@ -7,20 +7,25 @@ permissions:
   contents: write
 
 jobs:
-  create:
+  modify:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout android
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          ref: android
 
-      - name: Create android branch
+      - name: Download gradle
+        run: |
+          wget \
+          https://raw.githubusercontent.com/DarkCode2317/winlator-7.1/vanilla/
+
+      - name: Commit
         run: |
           git config user.name "DarkCode2317"
           git config user.email "darkcode2317@gmail.com"
 
-          git checkout -b android
+          git commit -m "Modify repo"
 
-          git push origin android
+          git push origin android --force
