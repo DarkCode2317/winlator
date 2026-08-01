@@ -24,7 +24,7 @@ jobs:
       - name: Extract imagefs
         run: |
           mkdir imagefs
-          unzip app/src/main/assets/imagefs.txz -d imagefs
+          tar -xf app/src/main/assets/imagefs.txz -C imagefs
 
       - name: Commit
         run: |
