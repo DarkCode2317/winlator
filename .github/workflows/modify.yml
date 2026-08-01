@@ -16,23 +16,10 @@ jobs:
         with:
           ref: android
 
-      - name: Download winlator 7.1 source code zip file
+      - name: Download gradle
         run: |
-          wget -O winlator.zip https://github.com/brunodev85/winlator/archive/refs/tags/v7.1.0.zip
-
-      - name: Extract
-        run: |
-          unzip winlator.zip
-          rm winlator.zip
-      
-      - name: Delete LFS
-        run: |
-          find . -name .gitattributes -delete
-
-      - name: Move content to current
-        run: |
-          mv winlator-7.1.0/* winlator-7.1.0/.[!.]* winlator-7.1.0/..?* . 2>/dev/null || true
-          rm -rf winlator-7.1.0
+          wget \
+          https://raw.githubusercontent.com/DarkCode2317/
 
       - name: Commit
         run: |
