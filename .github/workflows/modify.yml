@@ -1,4 +1,4 @@
-name: Modify Repo
+name: Test
 
 on:
   workflow_dispatch:
@@ -7,11 +7,11 @@ permissions:
   contents: write
 
 jobs:
-  modify:
+  test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout
         uses: actions/checkout@v4
         with:
           ref: android
@@ -22,28 +22,40 @@ jobs:
           git lfs install
           git lfs pull
 
-      - name: List 64 of imagefs.txz
+      - name: Extract imagefs.txz
         run: |
-          tar -tf app/src/main/assets/imagefs.txz | grep -i 64
+          mkdir imagefs
+          tar -xf app/src/main/assets/imagefs.txz -C imagefs
+
+      - name: List 64 of imagefs
+        run: |
+          echo "===Folders:"
+          find imagefs -type d -iname '*64*'
+          echo && echo "===Files:"
+          find imagefs -type f -iname '*64*'
 
       - name: List 64 of ubuntu-prepared.txz
+        if: false
         run: |
           tar -tf obb_image_generator/ubuntu-prepared.txz | grep -i 64
 
       - name: List 64 of patches.txz
+        if: false
         run: |
           tar -tf obb_image_generator/patches.txz | grep -i 64
 
       - name: List 64 of wine.txz
+        if: false
         run: |
           tar -tf obb_image_generator/wine.txz | grep -i 64
 
       - name: Commit
+        if: false
         run: |
           git config user.name "DarkCode2317"
           git config user.email "darkcode2317@gmail.com"
 
           git add .
-          git commit -m "Modify repo"
+          git commit -m "Test"
           git push origin android --force
       
