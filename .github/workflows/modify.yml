@@ -34,6 +34,16 @@ jobs:
           echo && echo "===Files:"
           find imagefs -type f -iname '*64*'
 
+      - name: Remove 64 of imagefs
+        run: |
+          rm -rf \
+          imagefs/opt/wine/lib/wine/x86_64-windows \
+          imagefs/opt/wine/lib/wine/x86_64-unix \
+          imagefs/usr/lib/aarch64-linux-gnu \
+          imagefs/usr/lib/x86_64-linux-gnu \
+          imagefs/opt/wine/bin/wine64
+          imagefs/opt/wine/bin/wine64-preloader
+
       - name: List 64 of ubuntu-prepared.txz
         if: false
         run: |
