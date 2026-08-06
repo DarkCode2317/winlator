@@ -27,13 +27,6 @@ jobs:
           mkdir imagefs
           tar -xf app/src/main/assets/imagefs.txz -C imagefs
 
-      - name: List 64 of imagefs
-        run: |
-          echo "===Folders:"
-          find imagefs -type d -iname '*64*'
-          echo && echo "===Files:"
-          find imagefs -type f -iname '*64*'
-
       - name: Remove 64 of imagefs
         run: |
           rm -rf \
@@ -43,6 +36,13 @@ jobs:
           imagefs/usr/lib/x86_64-linux-gnu \
           imagefs/opt/wine/bin/wine64
           imagefs/opt/wine/bin/wine64-preloader
+
+      - name: List 64 of imagefs
+        run: |
+          echo "===Folders:"
+          find imagefs -type d -iname '*64*'
+          echo && echo "===Files:"
+          find imagefs -type f -iname '*64*'
 
       - name: List 64 of ubuntu-prepared.txz
         if: false
