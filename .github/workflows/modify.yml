@@ -40,6 +40,11 @@ jobs:
 
       - name: Zip imagefs
         run: |
+          cd imagefs
+          tar -cJf ../imagefs.txz .
+          cd ..
+          echo "==Size of imagefs.txz:"
+          du -sh imagefs.txz
 
       - name: List 64 of ubuntu-prepared.txz
         if: false
