@@ -23,6 +23,8 @@ jobs:
 
       - name: Extract imagefs.txz
         run: |
+          echo "===Head entries:"
+          tar -tf app/src/main/assets/imagefs.txz | head
           mkdir imagefs
           tar -xf app/src/main/assets/imagefs.txz -C imagefs
 
@@ -36,12 +38,8 @@ jobs:
           imagefs/opt/wine/bin/wine64 \
           imagefs/opt/wine/bin/wine64-preloader
 
-      - name: List 64 of imagefs
+      - name: Zip imagefs
         run: |
-          echo "===Folders:"
-          find imagefs -type d -iname '*64*'
-          echo && echo "===Files:"
-          find imagefs -type f -iname '*64*'
 
       - name: List 64 of ubuntu-prepared.txz
         if: false
