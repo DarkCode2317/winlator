@@ -41,7 +41,7 @@ jobs:
       - name: Zip imagefs
         run: |
           cd imagefs
-          tar -cJf ../imagefs.txz .
+          tar -cf ../imagefs.txz -I "xz -9" .
           cd ..
           echo "==Size of imagefs.txz:"
           du -sh imagefs.txz
