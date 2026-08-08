@@ -35,6 +35,7 @@ jobs:
           tar -xf app/src/main/assets/imagefs.txz -C imagefs
 
       - name: Remove 64 of imagefs
+        if: false
         run: |
           rm -rf \
           imagefs/opt/wine/lib/wine/x86_64-windows \
