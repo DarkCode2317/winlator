@@ -16,7 +16,7 @@ jobs:
         with:
           ref: android
 
-      - name: Check real files
+      - name: Check imagefs
         run: |
           du -sh app/src/main/assets/imagefs.txz
 
