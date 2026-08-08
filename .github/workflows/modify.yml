@@ -16,10 +16,6 @@ jobs:
         with:
           ref: android
 
-      - name: Check imagefs
-        run: |
-          du -sh app/src/main/assets/imagefs.txz
-
       - name: Download LFS
         if: false
         run: |
