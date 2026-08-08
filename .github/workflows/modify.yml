@@ -17,7 +17,6 @@ jobs:
           ref: android
 
       - name: Download LFS
-        if: false
         run: |
           git lfs install
           git lfs pull
