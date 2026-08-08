@@ -16,12 +16,18 @@ jobs:
         with:
           ref: android
 
+      - name: Check real files
+        run: |
+          du -sh app/src/main/assets/imagefs.txz
+
       - name: Download LFS
+        if: false
         run: |
           git lfs install
           git lfs pull
 
       - name: Extract imagefs.txz
+        ìf: false
         run: |
           echo "===Head entries:"
           tar -tf app/src/main/assets/imagefs.txz | head
@@ -39,6 +45,7 @@ jobs:
           imagefs/opt/wine/bin/wine64-preloader
 
       - name: Zip imagefs
+        if: false
         run: |
           cd imagefs
           tar -cf ../imagefs.txz -I "xz -T0 -9e" .
