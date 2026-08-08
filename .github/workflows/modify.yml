@@ -21,10 +21,24 @@ jobs:
           du -sh app/src/main/assets/*.txz
 
       - name: Download LFS
-        if: false
         run: |
           git lfs install
+
+      - name: Debug LFS
+        run: |
+          echo "=== Before ==="
+          du -sh .git/lfs/objects 2>/dev/null || true
+          find .git/lfs/objects -type f 2>/dev/null | head
+
+          echo "=== Pull ==="
+          GIT_TRACE=1
+          GIT_TRANSFER_TRACE=1
+          GIT_CURL_VERBOSE=1
           git lfs pull
+
+          echo "=== After ==="
+          du -sh .git/lfs/objects 2>/dev/null || true
+          find .git/lfs/objects -type f 2>/dev/null | head
 
       - name: Extract imagefs.txz
         if: false
