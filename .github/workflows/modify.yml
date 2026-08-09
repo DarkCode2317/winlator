@@ -18,9 +18,15 @@ jobs:
         run: |
           du -sh app/src/main/assets/*.txz
 
+      - name: Check LFS cache
+        run: |
+          du -sh .git/lfs/objects
+
       - name: Download LFS
+        if: false
         run: |
           git lfs install
+          git lfs pull
 
       - name: Extract imagefs.txz
         if: false
