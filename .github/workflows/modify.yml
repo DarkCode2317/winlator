@@ -70,7 +70,7 @@ jobs:
           ubuntu-prepared/usr/lib/aarch64-linux-gnu
 
           echo && echo "==Files:"
-          find ubuntu-prepared -type f -iname "*64*"
+          find ubuntu-prepared -type f -exec file {} + 2>/dev/null | grep -Ei 'ELF 64-bit.*ARM aarch64' | cut -d: -f1
 
 
       - name: List 64 of patches.txz
