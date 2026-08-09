@@ -13,8 +13,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          ref: android
 
       - name: Check imagefs
         run: |
@@ -23,22 +21,6 @@ jobs:
       - name: Download LFS
         run: |
           git lfs install
-
-      - name: Debug LFS
-        run: |
-          echo "=== Before ==="
-          du -sh .git/lfs/objects 2>/dev/null || true
-          find .git/lfs/objects -type f 2>/dev/null | head
-
-          echo "=== Pull ==="
-          GIT_TRACE=1
-          GIT_TRANSFER_TRACE=1
-          GIT_CURL_VERBOSE=1
-          git lfs pull
-
-          echo "=== After ==="
-          du -sh .git/lfs/objects 2>/dev/null || true
-          find .git/lfs/objects -type f 2>/dev/null | head
 
       - name: Extract imagefs.txz
         if: false
