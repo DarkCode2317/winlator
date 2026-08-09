@@ -1,4 +1,4 @@
-name: Modify Repo
+name: Test
 
 on:
   workflow_dispatch:
@@ -7,25 +7,89 @@ permissions:
   contents: write
 
 jobs:
-  modify:
+  test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout android
+      - name: Checkout
         uses: actions/checkout@v4
         with:
           ref: android
 
-      - name: Download gradle
+      - name: Check imagefs
         run: |
-          wget \
-          https://raw.githubusercontent.com/DarkCode2317/winlator-7.1/vanilla/
+          du -sh app/src/main/assets/*.txz
+
+      - name: Download LFS
+        run: |
+          git lfs install
+
+      - name: Debug LFS
+        run: |
+          echo "=== Before ==="
+          du -sh .git/lfs/objects 2>/dev/null || true
+          find .git/lfs/objects -type f 2>/dev/null | head
+
+          echo "=== Pull ==="
+          GIT_TRACE=1
+          GIT_TRANSFER_TRACE=1
+          GIT_CURL_VERBOSE=1
+          git lfs pull
+
+          echo "=== After ==="
+          du -sh .git/lfs/objects 2>/dev/null || true
+          find .git/lfs/objects -type f 2>/dev/null | head
+
+      - name: Extract imagefs.txz
+        if: false
+        run: |
+          echo "===Head entries:"
+          tar -tf app/src/main/assets/imagefs.txz | head
+          mkdir imagefs
+          tar -xf app/src/main/assets/imagefs.txz -C imagefs
+
+      - name: Remove 64 of imagefs
+        if: false
+        run: |
+          rm -rf \
+          imagefs/opt/wine/lib/wine/x86_64-windows \
+          imagefs/opt/wine/lib/wine/x86_64-unix \
+          imagefs/usr/lib/aarch64-linux-gnu \
+          imagefs/usr/lib/x86_64-linux-gnu \
+          imagefs/opt/wine/bin/wine64 \
+          imagefs/opt/wine/bin/wine64-preloader
+
+      - name: Zip imagefs
+        if: false
+        run: |
+          cd imagefs
+          tar -cf ../imagefs.txz -I "xz -T0 -9e" .
+          cd ..
+          echo "==Size of imagefs.txz:"
+          du -sh imagefs.txz
+
+      - name: List 64 of ubuntu-prepared.txz
+        if: false
+        run: |
+          tar -tf obb_image_generator/ubuntu-prepared.txz | grep -i 64
+
+      - name: List 64 of patches.txz
+        if: false
+        run: |
+          tar -tf obb_image_generator/patches.txz | grep -i 64
+
+      - name: List 64 of wine.txz
+        if: false
+        run: |
+          tar -tf obb_image_generator/wine.txz | grep -i 64
 
       - name: Commit
+        if: false
         run: |
           git config user.name "DarkCode2317"
           git config user.email "darkcode2317@gmail.com"
 
-          git commit -m "Modify repo"
-
+          git add .
+          git commit -m "Test"
           git push origin android --force
+      
