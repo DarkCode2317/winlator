@@ -32,8 +32,6 @@ jobs:
       - name: Extract imagefs.txz
         if: false
         run: |
-          echo "===Head entries:"
-          tar -tf app/src/main/assets/imagefs.txz | head
           mkdir imagefs
           tar -xf app/src/main/assets/imagefs.txz -C imagefs
 
@@ -58,13 +56,18 @@ jobs:
           du -sh imagefs.txz
 
       - name: Extract ubuntu-prepared.txz
+        if: true
         run: |
-          
+          mkdir ubuntu-prepared
+          tar -xf obb_image_generator/ubuntu-prepared.txz -C ubuntu-prepared
 
       - name: List 64 of ubuntu-prepared.txz
-        if: false
+        if: true
         run: |
-          tar -tf obb_image_generator/ubuntu-prepared.txz | grep -i 64
+          echo "==Folders:"
+          find ubuntu-prepared -type d -iname "*64*"
+          echo && echo "==Files:"
+          find ubuntu-prepared -type f -iname "*64*"
 
       - name: List 64 of patches.txz
         if: false
