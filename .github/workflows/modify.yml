@@ -57,6 +57,10 @@ jobs:
           echo "==Size of imagefs.txz:"
           du -sh imagefs.txz
 
+      - name: Extract ubuntu-prepared.txz
+        run: |
+          
+
       - name: List 64 of ubuntu-prepared.txz
         if: false
         run: |
