@@ -14,16 +14,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Check imagefs
-        run: |
-          du -sh app/src/main/assets/*.txz
+      - name: Cache Git LFS
+        uses: actions/cache@v4
+        with:
+          path: .git/lfs/objects
+          key: winlator-lfs-${{ runner.os }}
 
       - name: Check LFS cache
         run: |
           du -sh .git/lfs/objects
 
       - name: Download LFS
-        if: false
         run: |
           git lfs install
           git lfs pull
